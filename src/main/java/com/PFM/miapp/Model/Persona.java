@@ -29,6 +29,17 @@ public class Persona {
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
     private List<Experiencia> experiencias;
 
+
+    public Persona() {
+    }
+
+    public Persona(String nombre, String apellido, int edad, List<Experiencia> experiencias, Persona persona) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.experiencias = experiencias;
+    }
+
     public List<Experiencia> getExperiencias() {
         return experiencias;
     }

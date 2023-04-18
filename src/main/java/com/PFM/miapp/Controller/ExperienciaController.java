@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -40,9 +40,9 @@ public class ExperienciaController {
         return "La Experiencia fue creada correctamente";
     }
      
-   //lista de experiencias por id de persona
-    @GetMapping ("/persona/{id}/lista")
-    public List <Experiencia> listaPer(@PathVariable Long id){
+
+    @GetMapping ("/exp-persona/{id}")
+    public List <Experiencia> listaPersonaId(@PathVariable Long id){
         return iExperiencia.findByPersonaId(id);    
         }
     
@@ -53,21 +53,9 @@ public class ExperienciaController {
         return "La persona fue eliminada correctamente";
     }
     
-    @PutMapping("/editar/{id}")
-    public Experiencia editExperiencia(@PathVariable Long id,
-                               @RequestParam ("empresa") String nuevaEmpresa,
-                               @RequestParam ("cargo") String nuevoCargo,
-                               @RequestParam ("fecha") int nuevaFecha,
-                               @RequestParam ("descripcion") String nuevaDescripcion){
-        Experiencia experiencia = iExperiencia.findExperiencia(id);
-        
-        experiencia.setEmpresa(nuevaEmpresa);
-        experiencia.setCargo(nuevoCargo);
-        experiencia.setFecha(nuevaFecha);
-        experiencia.setDescripcion(nuevaDescripcion);
-        
-        iExperiencia.saveExperiencia(experiencia);
-        
-        return experiencia;
+    @PutMapping("/editar")
+    public Experiencia edit(@RequestBody Experiencia expe) {      
+        iExperiencia.saveExperiencia(expe);
+        return expe;
     }
 }

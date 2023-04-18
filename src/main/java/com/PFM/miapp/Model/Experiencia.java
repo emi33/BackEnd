@@ -31,20 +31,22 @@ public class Experiencia {
     private String descripcion;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "personaid", nullable = false)
+    @JoinColumn(name = "personaid", nullable = false, insertable=false, updatable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Persona persona;
 
+    private Long personaid;
+    
     public Experiencia() {
     }
 
-    public Experiencia(String empresa, String cargo, int fecha, String descripcion) {
+    public Experiencia(String empresa, String cargo, int fecha, String descripcion, Persona persona) {
         this.empresa = empresa;
         this.cargo = cargo;
         this.fecha = fecha;
         this.descripcion = descripcion;
-
+        this.persona=persona;
     }
 
     public Long getId() {
@@ -94,5 +96,15 @@ public class Experiencia {
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
+
+    public Long getPersonaid() {
+        return personaid;
+    }
+
+    public void setPersonaid(Long personaid) {
+        this.personaid = personaid;
+    }
+    
+    
 
 }
