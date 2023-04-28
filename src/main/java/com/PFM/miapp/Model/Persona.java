@@ -54,6 +54,9 @@ public class Persona {
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
     private List<Educacion> estudios;
+    
+     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
+    private List<Proyecto> proyectos;
 
     public Persona() {
     }
@@ -139,6 +142,14 @@ public class Persona {
 
     public void setEstudios(List<Educacion> estudios) {
         this.estudios = estudios;
+    }
+
+    public List<Proyecto> getProyectos() {
+        return proyectos;
+    }
+
+    public void setProyectos(List<Proyecto> proyectos) {
+        this.proyectos = proyectos;
     }
     
     
