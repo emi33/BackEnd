@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.PFM.miapp.Controller;
 
 import com.PFM.miapp.Interface.IExperienciaService;
 import com.PFM.miapp.Model.Experiencia;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,47 +14,75 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author Usuario
- */
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/experiencias")
 public class ExperienciaController {
-    
+
     @Autowired
     private IExperienciaService iExperiencia;
-    
+
+    @GetMapping("/persona/{id}")
+    public ResponseEntity<List<Experiencia>> getAllExperienciasByPersonaId(@PathVariable Long id) {
+
+        List<Experiencia> experiencias = iExperiencia.findByPersonaId(id);
+        return new ResponseEntity<>(experiencias, HttpStatus.OK);
+    }
+    @GetMapping("/experiencia/{id}")
+    public ResponseEntity<Experiencia> getExperienciaById(@PathVariable Long id) {
+
+        Experiencia experiencias = iExperiencia.findExperiencia(id);
+        return new ResponseEntity<>(experiencias, HttpStatus.OK);
+    }
+
     @GetMapping("/traer")
-    public List<Experiencia> getExperiencias(){
+    public List<Experiencia> getExperiencias() {
         return iExperiencia.getExperiencias();
     }
-    
-    @PostMapping("/crear")
-    public String createExperiencia(@RequestBody Experiencia experiencia){
-        iExperiencia.saveExperiencia(experiencia);
-        return "La Experiencia fue creada correctamente";
-    }
-     
 
-    @GetMapping ("/exp-persona/{id}")
-    public List <Experiencia> listaPersonaId(@PathVariable Long id){
-        return iExperiencia.findByPersonaId(id);    
+    @PostMapping("/crear")
+    public ResponseEntity<HttpStatus> createExperiencia(@RequestBody Experiencia experiencia) {
+        
+        if(experiencia.getPersonaid()!= null){
+            iExperiencia.saveExperiencia(experiencia);
+           
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    
-    
-    @DeleteMapping("/borrar/{id}")
-    public String deleteExperiencia(@PathVariable Long id){
-        iExperiencia.deleteExperiencia(id);
-        return "La persona fue eliminada correctamente";
+        
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PutMapping("/editar/persona/{id}/experiencia/{Id}")
+    public ResponseEntity<Experiencia> updateExperiencia(@PathVariable long id, @PathVariable long Id, @RequestBody Experiencia expRequest) {
+        List<Experiencia> experiencias = iExperiencia.findByPersonaId(id);
+        Experiencia experiencia = iExperiencia.findExperiencia(Id);
+        if (experiencias != null && experiencia != null) {
+            Experiencia expe = iExperiencia.findExperiencia(Id);
+            expe.setCargo(expRequest.getCargo());
+            expe.setDescripcion(expRequest.getDescripcion());
+            expe.setEmpresa(expRequest.getEmpresa());
+            expe.setFecha(expRequest.getFecha());
+            iExperiencia.saveExperiencia(expe);
+            expRequest = expe;
+        }
+        return new ResponseEntity<>(expRequest, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/borrar/{id}")
+    public ResponseEntity<HttpStatus> deleteExperiencia(@PathVariable Long id) {
+        iExperiencia.deleteExperiencia(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     
+    //no lo vamos a usar
     @PutMapping("/editar")
-    public Experiencia edit(@RequestBody Experiencia expe) {      
+    public Experiencia edit(@RequestBody Experiencia expe) {
         iExperiencia.saveExperiencia(expe);
         return expe;
     }
+
 }

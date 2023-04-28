@@ -4,9 +4,10 @@
  */
 package com.PFM.miapp.Repository;
 
-import com.PFM.miapp.Model.Experiencia;
+import com.PFM.miapp.Model.Educacion;
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,10 +16,11 @@ import org.springframework.stereotype.Repository;
  * @author Usuario
  */
 @Repository
-public interface ExperienciaRepository extends JpaRepository <Experiencia, Long>{
-     List<Experiencia> findByPersonaId(Long personaId);
-     
-     //elimina todas las experiencias de una persona
+public interface EducacionRepository extends JpaRepository<Educacion, Long>{
+     List<Educacion> findByPersonaId(Long personaId);
+    
+     public boolean existsById(Long id);
+     //elimina todas las educaciones de una persona
      @Transactional
      void deleteByPersonaId(long personaId);
 }

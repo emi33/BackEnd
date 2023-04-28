@@ -6,10 +6,12 @@ package com.PFM.miapp.Controller;
 
 import com.PFM.miapp.Interface.IPersonaService;
 import com.PFM.miapp.Model.Persona;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins="http://localhost:4200")  
 @RequestMapping("/personas")
 public class PersonaController {
     
@@ -27,29 +30,36 @@ public class PersonaController {
     private IPersonaService iPersona;
     
     @GetMapping("/traer")
-    public List<Persona> getPersonas(){
-        return iPersona.getPersonas();
+    public ResponseEntity<List<Persona>> getPersonas(){
+        return new ResponseEntity<>(iPersona.getPersonas(), HttpStatus.OK);
     }
     
     @PostMapping("/crear")
-    public String createPersona(@RequestBody Persona persona){
+    public  ResponseEntity<HttpStatus> savePersona(@RequestBody Persona persona){
         iPersona.savePersona(persona);
-        return "La persona fue creada correctamente";
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     
     @DeleteMapping("/borrar/{id}")
-    public String deletePersona(@PathVariable Long id){
+    public ResponseEntity<HttpStatus> deletePersona(@PathVariable Long id){
         iPersona.deletePersona(id);
-        return "La persona fue eliminada correctamente";
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
-    @PutMapping("/editar")
-    public void edit(@RequestBody Persona persona){
-        iPersona.editPersona(persona);
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<HttpStatus> edit(@PathVariable("id") long id, @RequestBody Persona persona){
+        if (iPersona.findPersona(id)!= null){
+            iPersona.editPersona(persona);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        
+        
     }
     
     @GetMapping("/traer/{id}")
-    public ResponseEntity<Persona> detail(@PathVariable("id") Long id){
+    public ResponseEntity<Persona> detail(@PathVariable("id") long id){
         return ResponseEntity.ok(iPersona.findPersona(id));
     }       
 }

@@ -5,11 +5,15 @@
 package com.PFM.miapp.Model;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -17,28 +21,77 @@ import java.util.List;
  * @author Usuario
  */
 @Entity
+@Table(name = "persona")
 public class Persona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "persona_generator")
     private Long id;
+
+    @NotNull
+    @Column(name = "nombre")
     private String nombre;
+    @NotNull
+    @Column(name = "apellido")
     private String apellido;
+    @NotNull
+    @Column(name = "edad")
     private int edad;
+    @NotNull
+    @Size(max = 4000)
+    @Column(name = "acercade")
+    private String acercade;
+    @NotNull
+    @Column(name = "ocupacion")
+    private String ocupacion;
+    @NotNull
+    @Size(max = 500)
+    @Column(name = "imagen")
+    private String imagen;
 
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
     private List<Experiencia> experiencias;
-
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
+    private List<Educacion> estudios;
 
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, int edad, List<Experiencia> experiencias, Persona persona) {
+    public Persona(String nombre, String apellido, int edad, String acercade, String ocupacion, String imagen) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
-        this.experiencias = experiencias;
+        this.acercade = acercade;
+        this.ocupacion = ocupacion;
+        this.imagen = imagen;
     }
+
+    public String getAcercade() {
+        return acercade;
+    }
+
+    public void setAcercade(String acercade) {
+        this.acercade = acercade;
+    }
+
+    public String getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(String ocupacion) {
+        this.ocupacion = ocupacion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    
 
     public List<Experiencia> getExperiencias() {
         return experiencias;
@@ -79,5 +132,15 @@ public class Persona {
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
+    public List<Educacion> getEstudios() {
+        return estudios;
+    }
+
+    public void setEstudios(List<Educacion> estudios) {
+        this.estudios = estudios;
+    }
+    
+    
 
 }

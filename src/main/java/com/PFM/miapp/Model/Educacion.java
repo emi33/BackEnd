@@ -22,20 +22,19 @@ import org.hibernate.annotations.OnDeleteAction;
  * @author Usuario
  */
 @Entity
-@Table(name = "experiencia")
-public class Experiencia {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "experiencia_generator")
+@Table(name = "educacion")
+public class Educacion {
+     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "educacion_generator")
     private Long id;
-    @Column(name = "empresa")
-    private String empresa;
-    @Column(name = "cargo")
-    private String cargo;
-    @Column(name = "fecha")
-    private int fecha;
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "institucion")
+    private String institucion;
+    @Column(name = "titulo")
+    private String titulo;
+    @Column(name = "fechainicio")
+    private int fechainicio;
+    @Column(name = "fechafin")
+    private int fechafin;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "personaid", nullable = false, insertable=false, updatable=false)
@@ -45,15 +44,15 @@ public class Experiencia {
 
     private Long personaid;
     
-    public Experiencia() {
+    public Educacion() {
     }
 
-    public Experiencia(String empresa, String cargo, int fecha, String descripcion, Persona persona) {
-        this.empresa = empresa;
-        this.cargo = cargo;
-        this.fecha = fecha;
-        this.descripcion = descripcion;
-        this.persona=persona;
+    public Educacion(String institucion, String titulo, int fechainicio, int fechafin, Persona persona) {
+        this.institucion = institucion;
+        this.titulo = titulo;
+        this.fechainicio = fechainicio;
+        this.fechafin = fechafin;
+        this.persona = persona;
     }
 
     public Long getId() {
@@ -64,36 +63,36 @@ public class Experiencia {
         this.id = id;
     }
 
-    public String getEmpresa() {
-        return empresa;
+    public String getInstitucion() {
+        return institucion;
     }
 
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
+    public void setInstitucion(String institucion) {
+        this.institucion = institucion;
     }
 
-    public String getCargo() {
-        return cargo;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public int getFecha() {
-        return fecha;
+    public int getFechainicio() {
+        return fechainicio;
     }
 
-    public void setFecha(int fecha) {
-        this.fecha = fecha;
+    public void setFechainicio(int fechainicio) {
+        this.fechainicio = fechainicio;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public int getFechafin() {
+        return fechafin;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setFechafin(int fechafin) {
+        this.fechafin = fechafin;
     }
 
     public Persona getPersona() {
@@ -112,6 +111,12 @@ public class Experiencia {
         this.personaid = personaid;
     }
     
+
+   
+
     
 
+    
+    
+    
 }

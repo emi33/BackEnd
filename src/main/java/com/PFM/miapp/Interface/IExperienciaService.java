@@ -21,6 +21,8 @@ public interface IExperienciaService {
     
     public Experiencia findExperiencia(Long id);
     
-     public List<Experiencia> findByPersonaId(Long personaId);
+    public List<Experiencia> findByPersonaId(Long personaId);
+    public Experiencia getOne(long id);
+  
 }
 
