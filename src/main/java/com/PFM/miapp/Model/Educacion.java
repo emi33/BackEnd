@@ -24,7 +24,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "educacion")
 public class Educacion {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "educacion_generator")
     private Long id;
     @Column(name = "institucion")
