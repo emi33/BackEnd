@@ -22,22 +22,18 @@ import org.hibernate.annotations.OnDeleteAction;
  * @author Usuario
  */
 @Entity
-@Table(name = "habilidad")
-public class Habilidad {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "habilidad_generator")
+@Table(name = "contacto")
+public class Contacto {
+    
+      @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contacto_generator")
     private Long id;
-    @Column(name = "habilidad")
-    private String habilidad;
 
-    @Column(name = "porcentaje")
-    private int porcentaje;
-    @Column(name = "semana")
-    private int semana;
-    @Column(name = "mensual")
-    private int mensual;
-
+     @Column(name = "social")
+    private String social;
+    @Column(name = "user")
+    private String user;
+    
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "personaid", nullable = false, insertable = false, updatable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -46,14 +42,12 @@ public class Habilidad {
 
     private Long personaid;
 
-    public Habilidad() {
+    public Contacto() {
     }
 
-    public Habilidad(String habilidad, int porcentaje, int semana, int mensual, Persona persona) {
-        this.habilidad = habilidad;
-        this.porcentaje = porcentaje;
-        this.semana = semana;
-        this.mensual = mensual;
+    public Contacto(String social, String user, Persona persona) {
+        this.social = social;
+        this.user = user;
         this.persona = persona;
     }
 
@@ -65,36 +59,20 @@ public class Habilidad {
         this.id = id;
     }
 
-    public String getHabilidad() {
-        return habilidad;
+    public String getSocial() {
+        return social;
     }
 
-    public void setHabilidad(String habilidad) {
-        this.habilidad = habilidad;
+    public void setSocial(String social) {
+        this.social = social;
     }
 
-    public int getSemana() {
-        return semana;
+    public String getUser() {
+        return user;
     }
 
-    public void setSemana(int semana) {
-        this.semana = semana;
-    }
-
-    public int getMensual() {
-        return mensual;
-    }
-
-    public void setMensual(int mensual) {
-        this.mensual = mensual;
-    }
-
-    public int getPorcentaje() {
-        return porcentaje;
-    }
-
-    public void setPorcentaje(int porcentaje) {
-        this.porcentaje = porcentaje;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public Persona getPersona() {
@@ -112,5 +90,6 @@ public class Habilidad {
     public void setPersonaid(Long personaid) {
         this.personaid = personaid;
     }
-
+    
+    
 }

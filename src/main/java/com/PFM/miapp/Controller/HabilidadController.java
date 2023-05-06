@@ -63,9 +63,11 @@ public class HabilidadController {
         List<Habilidad> habilidades = iHabilidad.findByPersonaId(id);
         if (habilidades != null && iHabilidad.existsById(Id)) {
             Habilidad skill = iHabilidad.findHabilidad(Id);
-            skill.setTecnologia(habilidad.getTecnologia());     
-            skill.setArea(habilidad.getArea());
+            skill.setHabilidad(habilidad.getHabilidad());     
+            
             skill.setPorcentaje(habilidad.getPorcentaje());
+            skill.setSemana(habilidad.getSemana());
+            skill.setMensual(habilidad.getMensual());
             iHabilidad.saveHabilidad(skill);
             habilidad = skill;
         }

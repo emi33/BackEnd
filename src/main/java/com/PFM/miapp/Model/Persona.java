@@ -37,37 +37,69 @@ public class Persona {
     @NotNull
     @Column(name = "edad")
     private int edad;
-    @NotNull
+
     @Size(max = 4000)
     @Column(name = "acercade")
     private String acercade;
-    @NotNull
+
     @Column(name = "ocupacion")
     private String ocupacion;
-    @NotNull
-    @Size(max = 500)
+
+    @Column(name = "email")
+    private String email;
+
+    @Size(max = 5000)
     @Column(name = "imagen")
     private String imagen;
 
+    @Size(max = 2000)
+    @Column(name = "banner")
+    private String banner;
+
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
     private List<Experiencia> experiencias;
-    
+
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
     private List<Educacion> estudios;
-    
-     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
+    private List<Habilidad> habilidades;
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
     private List<Proyecto> proyectos;
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
+    private List<Contacto> contactos;
 
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, int edad, String acercade, String ocupacion, String imagen) {
+    public Persona(String nombre, String apellido, int edad, String acercade, String ocupacion, String imagen, String banner, String email) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
         this.acercade = acercade;
         this.ocupacion = ocupacion;
         this.imagen = imagen;
+        this.banner = banner;
+        this.email = email;
+
+    }
+
+    public List<Contacto> getContactos() {
+        return contactos;
+    }
+
+    public void setContactos(List<Contacto> contactos) {
+        this.contactos = contactos;
+    }
+
+    public List<Habilidad> getHabilidades() {
+        return habilidades;
+    }
+
+    public void setHabilidades(List<Habilidad> habilidades) {
+        this.habilidades = habilidades;
     }
 
     public String getAcercade() {
@@ -94,7 +126,21 @@ public class Persona {
         this.imagen = imagen;
     }
 
-    
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public List<Experiencia> getExperiencias() {
         return experiencias;
@@ -151,7 +197,5 @@ public class Persona {
     public void setProyectos(List<Proyecto> proyectos) {
         this.proyectos = proyectos;
     }
-    
-    
 
 }

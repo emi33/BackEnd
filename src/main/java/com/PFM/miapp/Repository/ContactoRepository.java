@@ -4,7 +4,7 @@
  */
 package com.PFM.miapp.Repository;
 
-import com.PFM.miapp.Model.Proyecto;
+import com.PFM.miapp.Model.Contacto;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,10 +15,10 @@ import org.springframework.stereotype.Repository;
  * @author Usuario
  */
 @Repository
-public interface ProyectoRepository extends JpaRepository <Proyecto, Long>{
-     List<Proyecto> findByPersonaId(Long personaId);
+public interface ContactoRepository extends JpaRepository <Contacto, Long>{
+    List<Contacto> findByPersonaId(Long personaId);
      
-     //elimina todos los proyectos de una persona
+     //elimina todos los contactos de una persona
      @Transactional
      void deleteByPersonaId(long personaId);
 }
