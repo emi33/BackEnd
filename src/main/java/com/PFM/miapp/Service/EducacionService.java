@@ -59,6 +59,9 @@ public class EducacionService implements IEducacionService{
     public boolean existsById(Long id) {
         return educacionRepository.existsById(id);
     }
+
+ 
+   
     
    
 }

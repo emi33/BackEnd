@@ -23,4 +23,5 @@ public interface IEducacionService {
     public List<Educacion> findByPersonaId(Long personaId);
     public Educacion getOne(long id);
        public boolean existsById(Long id);
+      
 }

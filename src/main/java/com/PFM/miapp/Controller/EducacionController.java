@@ -84,5 +84,19 @@ public class EducacionController {
         iEducacion.deleteEducacion(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
+    
+    @PutMapping("/cambiar/primero/segundo")
+    public ResponseEntity<HttpStatus> changeValue(@PathVariable long primero, @PathVariable long segundo){
+        if (iEducacion.existsById(primero)&& iEducacion.existsById(segundo)){
+            Educacion primerEdu = iEducacion.findEducacion(primero);
+            Educacion segundEdu = iEducacion.findEducacion(segundo);
+            primerEdu.setId(segundo);
+            segundEdu.setId(primero);
+            iEducacion.saveEducacion(primerEdu);
+            iEducacion.saveEducacion(segundEdu);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
