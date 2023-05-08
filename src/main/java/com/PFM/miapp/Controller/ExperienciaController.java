@@ -65,6 +65,7 @@ public class ExperienciaController {
             expe.setDescripcion(expRequest.getDescripcion());
             expe.setEmpresa(expRequest.getEmpresa());
             expe.setFecha(expRequest.getFecha());
+            expe.setFechafin(expRequest.getFechafin());
             iExperiencia.saveExperiencia(expe);
             expRequest = expe;
         }

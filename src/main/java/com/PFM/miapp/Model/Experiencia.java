@@ -34,6 +34,8 @@ public class Experiencia {
     private String cargo;
     @Column(name = "fecha")
     private int fecha;
+    @Column(name = "fechafin")
+    private int fechafin;
     @Column(name = "descripcion")
     private String descripcion;
 
@@ -48,12 +50,13 @@ public class Experiencia {
     public Experiencia() {
     }
 
-    public Experiencia(String empresa, String cargo, int fecha, String descripcion, Persona persona) {
+    public Experiencia(String empresa, String cargo, int fecha, String descripcion, Persona persona, int fechafin) {
         this.empresa = empresa;
         this.cargo = cargo;
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.persona=persona;
+        this.fechafin=fechafin;
     }
 
     public Long getId() {
@@ -110,6 +113,14 @@ public class Experiencia {
 
     public void setPersonaid(Long personaid) {
         this.personaid = personaid;
+    }
+
+    public int getFechafin() {
+        return fechafin;
+    }
+
+    public void setFechafin(int fechafin) {
+        this.fechafin = fechafin;
     }
     
     
