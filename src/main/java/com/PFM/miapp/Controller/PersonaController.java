@@ -61,5 +61,11 @@ public class PersonaController {
     @GetMapping("/traer/{id}")
     public ResponseEntity<Persona> detail(@PathVariable("id") long id){
         return ResponseEntity.ok(iPersona.findPersona(id));
-    }       
+    }      
+    
+    @GetMapping("/id")
+    public Long obtenerProximoId() {
+        return iPersona.obtenerProximoId();
+    }
 }
+

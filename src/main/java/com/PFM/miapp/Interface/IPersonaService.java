@@ -5,6 +5,7 @@
 package com.PFM.miapp.Interface;
 
 import com.PFM.miapp.Model.Persona;
+
 import java.util.List;
 
 /**
@@ -22,4 +23,8 @@ public interface IPersonaService {
     public Persona findPersona(Long id);
     
     public void editPersona(Persona persona);
+    
+
+    
+    public Long obtenerProximoId();
 }

@@ -7,6 +7,10 @@ package com.PFM.miapp.Service;
 import com.PFM.miapp.Interface.IPersonaService;
 import com.PFM.miapp.Model.Persona;
 import com.PFM.miapp.Repository.PersonaRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PersonaService implements IPersonaService {
+    
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     private PersonaRepository personaRepository;
@@ -47,5 +54,13 @@ public class PersonaService implements IPersonaService {
     public void editPersona(Persona persona) {
         personaRepository.save(persona);
     }
+
+    @Override
+    public Long obtenerProximoId() {
+        Query query = entityManager.createNativeQuery("SELECT PERSONA_GENERATOR.NEXTVAL FROM DUAL");
+        return ((BigDecimal) query.getSingleResult()).longValue();
+    }
+    
+    
 
 }
