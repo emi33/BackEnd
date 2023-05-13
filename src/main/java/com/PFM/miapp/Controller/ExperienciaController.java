@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://portfolio-maker-98538.web.app")
 @RequestMapping("/experiencias")
 public class ExperienciaController {
 
@@ -44,15 +44,12 @@ public class ExperienciaController {
 
     @PostMapping("/crear")
     public ResponseEntity<HttpStatus> createExperiencia(@RequestBody Experiencia experiencia) {
-        
         if(experiencia.getPersonaid()!= null){
             iExperiencia.saveExperiencia(experiencia);
-           
+           return new ResponseEntity<>(HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        
-        return new ResponseEntity<>(HttpStatus.OK);
+        }  
     }
 
     @PutMapping("/editar/persona/{id}/experiencia/{Id}")

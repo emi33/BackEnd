@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")  
+@CrossOrigin(origins="https://portfolio-maker-98538.web.app")  
 @RequestMapping("/personas")
 public class PersonaController {
     
@@ -63,9 +63,6 @@ public class PersonaController {
         return ResponseEntity.ok(iPersona.findPersona(id));
     }      
     
-    @GetMapping("/id")
-    public Long obtenerProximoId() {
-        return iPersona.obtenerProximoId();
-    }
+   
 }
 

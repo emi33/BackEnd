@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Usuario
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://portfolio-maker-98538.web.app")
 @RequestMapping("/proyecto")
 public class ProyectoController {
 
