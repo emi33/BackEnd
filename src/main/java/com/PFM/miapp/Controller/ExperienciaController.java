@@ -75,12 +75,6 @@ public class ExperienciaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    
-    //no lo vamos a usar
-    @PutMapping("/editar")
-    public Experiencia edit(@RequestBody Experiencia expe) {
-        iExperiencia.saveExperiencia(expe);
-        return expe;
-    }
+   
 
 }
